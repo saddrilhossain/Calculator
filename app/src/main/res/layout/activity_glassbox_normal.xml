@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.fossify.math.activities.GlassboxNormalActivity"
+    tools:ignore="HardcodedText,Autofill">
+
+    <org.fossify.commons.views.MyAppBarLayout
+        android:id="@+id/glassbox_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/glassbox_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/color_primary"
+            app:title="Glassbox: Normal"
+            app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+
+    </org.fossify.commons.views.MyAppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/glassbox_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/glassbox_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- STEP 1: the question, written like CAIE writes it -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Your question:  X ~ N(μ, σ²)"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:text="μ ="
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/input_mean"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="μ (mean)"
+                    android:inputType="numberDecimal|numberSigned" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:text="σ² ="
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/input_variance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="σ² (variance)"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/region_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:checkedButton="@+id/region_less"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/region_less"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P(X &lt; a)" />
+
+                <RadioButton
+                    android:id="@+id/region_greater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P(X &gt; a)" />
+
+                <RadioButton
+                    android:id="@+id/region_between"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P(a &lt; X &lt; b)" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:text="a ="
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/input_a"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="a"
+                    android:inputType="numberDecimal|numberSigned" />
+
+                <LinearLayout
+                    android:id="@+id/b_holder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="4dp"
+                        android:text="b ="
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/input_b"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="b"
+                        android:inputType="numberDecimal|numberSigned" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_show_region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show region" />
+
+            <!-- The picture: this is the "glass" in Glassbox -->
+            <org.fossify.math.views.NormalCurveView
+                android:id="@+id/normal_curve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp" />
+
+            <!-- STEP 2: the student's own z -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2. Check your z-value for a"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:text="z ="
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/input_z"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="your z"
+                    android:inputType="numberDecimal|numberSigned" />
+
+                <Button
+                    android:id="@+id/btn_check_z"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check z" />
+            </LinearLayout>
+
+            <!-- STEP 3: the student's final answer -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="3. Check your final answer"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:text="P ="
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/input_answer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="your probability"
+                    android:inputType="numberDecimal" />
+
+                <Button
+                    android:id="@+id/btn_check_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check" />
+            </LinearLayout>
+
+            <!-- Mentor feedback appears here -->
+            <TextView
+                android:id="@+id/feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
