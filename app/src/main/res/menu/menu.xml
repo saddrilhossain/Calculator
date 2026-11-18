@@ -14,6 +14,11 @@
         android:title="@string/unit_converter"
         app:showAsAction="always" />
     <item
+        android:id="@+id/glassbox"
+        android:title="Glassbox: Normal distribution"
+        app:showAsAction="never"
+        tools:ignore="HardcodedText" />
+    <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings_cog_vector"
         android:title="@string/settings"

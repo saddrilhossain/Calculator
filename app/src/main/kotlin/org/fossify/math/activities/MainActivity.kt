@@ -160,6 +160,7 @@ class MainActivity : SimpleActivity(), Calculator {
                 R.id.history -> showHistory()
                 R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
                 R.id.unit_converter -> launchUnitConverter()
+                R.id.glassbox -> launchGlassbox()
                 R.id.settings -> launchSettings()
                 R.id.about -> launchAbout()
                 else -> return@setOnMenuItemClickListener false
@@ -200,6 +201,11 @@ class MainActivity : SimpleActivity(), Calculator {
     private fun launchUnitConverter() {
         hideKeyboard()
         startActivity(Intent(applicationContext, UnitConverterPickerActivity::class.java))
+    }
+
+    private fun launchGlassbox() {
+        hideKeyboard()
+        startActivity(Intent(applicationContext, GlassboxNormalActivity::class.java))
     }
 
     private fun launchSettings() {

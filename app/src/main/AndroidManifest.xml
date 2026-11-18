@@ -42,6 +42,11 @@
             android:exported="false" />
 
         <activity
+            android:name="org.fossify.math.activities.GlassboxNormalActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name="org.fossify.math.activities.WidgetConfigureActivity"
             android:exported="true"
             android:screenOrientation="portrait"
